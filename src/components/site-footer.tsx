@@ -1,67 +1,89 @@
 import Link from "next/link";
 
+import { BrandWordmark } from "@/components/brand-wordmark";
 import { siteConfig } from "@/data/site";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border/70 bg-white/85">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_0.8fr_0.8fr] lg:px-8">
-        <div>
-          <Link href="/" className="font-display text-3xl text-brand-dark">
-            {siteConfig.name}
-          </Link>
-          <p className="mt-4 max-w-md text-sm leading-7 text-foreground/75">
-            {siteConfig.description}
+    <footer className="mt-16 bg-brand-dark text-white">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.15fr_0.85fr_0.9fr] lg:px-8">
+        <div className="max-w-md">
+          <BrandWordmark light />
+          <p className="mt-5 text-sm leading-8 text-white/72">
+            Sito vetrina pubblico di Virtus, costruito per presentare i servizi,
+            orientare il primo contatto e rendere piu semplice capire da dove partire.
           </p>
+          <a
+            href={siteConfig.contacts.whatsappHref}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-brand-dark transition hover:bg-brand-soft"
+          >
+            Scrivici su WhatsApp
+          </a>
         </div>
 
         <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.24em] text-brand">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
             Navigazione
-          </h2>
-          <ul className="mt-4 space-y-3 text-sm text-foreground/80">
+          </p>
+          <ul className="mt-5 space-y-3 text-sm text-white/78">
             {siteConfig.mainNavigation.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="hover:text-brand-dark">
+                <Link href={item.href} className="transition hover:text-white">
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
+
+          <div className="mt-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
+              Pagine legali
+            </p>
+            <div className="mt-4 flex flex-col gap-3 text-sm text-white/78">
+              {siteConfig.legalNavigation.map((item) => (
+                <Link key={item.href} href={item.href} className="transition hover:text-white">
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.24em] text-brand">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
             Contatti
-          </h2>
-          <ul className="mt-4 space-y-3 text-sm text-foreground/80">
-            <li>{siteConfig.contacts.address}</li>
-            <li>{siteConfig.contacts.phone}</li>
-            <li>{siteConfig.contacts.email}</li>
-            <li>
-              <a
-                href={siteConfig.contacts.whatsappHref}
-                target="_blank"
-                rel="noreferrer"
-                className="font-semibold text-brand hover:text-brand-dark"
-              >
-                Scrivici su WhatsApp
-              </a>
-            </li>
-          </ul>
+          </p>
+          <div className="mt-5 space-y-4">
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/6 px-5 py-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/52">
+                WhatsApp
+              </p>
+              <p className="mt-2 text-sm text-white/82">{siteConfig.contacts.whatsappDisplay}</p>
+            </div>
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/6 px-5 py-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/52">
+                Telefono
+              </p>
+              <p className="mt-2 text-sm text-white/82">{siteConfig.contacts.phone}</p>
+            </div>
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/6 px-5 py-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/52">
+                Indirizzo
+              </p>
+              <p className="mt-2 text-sm leading-7 text-white/82">
+                {siteConfig.contacts.address}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="border-t border-border/70">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 text-sm text-foreground/65 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-5 text-sm text-white/55 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <p>{siteConfig.footerNote}</p>
-          <div className="flex flex-wrap gap-4">
-            {siteConfig.legalNavigation.map((item) => (
-              <Link key={item.href} href={item.href} className="hover:text-brand-dark">
-                {item.label}
-              </Link>
-            ))}
-          </div>
+          <p>Per ora i recapiti sono placeholder, pronti da sostituire.</p>
         </div>
       </div>
     </footer>

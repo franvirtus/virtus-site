@@ -153,5 +153,5 @@ export const siteConfig = {
         "Scopri i servizi di Virtus: aree professionali dedicate a salute, benessere e performance.",
     },
   },
-  footerNote: "© 2026 Virtus. Tutti i diritti riservati.",
+  footerNote: "(c) 2026 Virtus. Tutti i diritti riservati.",
 } as const;
