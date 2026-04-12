@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { BrandWordmark } from "@/components/brand-wordmark";
+import { BrandLogo } from "@/components/brand-logo";
 import { siteConfig } from "@/data/site";
 
 export function SiteFooter() {
@@ -8,7 +8,9 @@ export function SiteFooter() {
     <footer className="mt-16 bg-brand-dark text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.15fr_0.85fr_0.9fr] lg:px-8">
         <div className="max-w-md">
-          <BrandWordmark light />
+          <div className="inline-flex rounded-[1.6rem] bg-white px-4 py-3 shadow-[0_18px_36px_rgba(0,0,0,0.14)]">
+            <BrandLogo />
+          </div>
           <p className="mt-5 text-sm leading-8 text-white/72">
             Sito vetrina pubblico di Virtus, costruito per presentare i servizi,
             orientare il primo contatto e rendere piu semplice capire da dove partire.

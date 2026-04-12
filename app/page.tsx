@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { BrandWordmark } from "@/components/brand-wordmark";
+import { BrandLogo } from "@/components/brand-logo";
 import { CtaBanner } from "@/components/cta-banner";
 import { SectionHeading } from "@/components/section-heading";
 import { ServiceCard } from "@/components/service-card";
@@ -25,8 +25,8 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl overflow-hidden rounded-[2.2rem] border border-border/70 bg-white shadow-[0_26px_60px_rgba(15,61,56,0.08)]">
           <div className="grid gap-10 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:py-12">
             <div className="max-w-3xl">
-              <div className="rounded-[1.6rem] border border-border/60 bg-surface-muted px-5 py-4">
-                <BrandWordmark />
+              <div className="inline-flex rounded-[1.6rem] border border-border/60 bg-surface-muted px-5 py-4">
+                <BrandLogo />
               </div>
 
               <span className="mt-6 inline-flex rounded-full border border-brand/10 bg-brand-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark">

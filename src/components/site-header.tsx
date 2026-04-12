@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { BrandWordmark } from "@/components/brand-wordmark";
+import { BrandLogo } from "@/components/brand-logo";
 import { siteConfig } from "@/data/site";
 
 export function SiteHeader() {
@@ -9,9 +9,9 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="rounded-2xl border border-transparent px-1 py-1 transition hover:border-border/60"
+          className="rounded-2xl border border-transparent bg-white px-3 py-2 shadow-[0_10px_30px_rgba(15,61,56,0.05)] transition hover:border-border/60"
         >
-          <BrandWordmark compact />
+          <BrandLogo compact />
         </Link>
 
         <nav className="hidden items-center rounded-full border border-border/70 bg-white px-3 py-2 shadow-[0_10px_30px_rgba(15,61,56,0.06)] lg:flex">
@@ -52,7 +52,7 @@ export function SiteHeader() {
           </summary>
           <div className="absolute right-4 top-[78px] w-[min(19rem,calc(100vw-2rem))] rounded-[1.75rem] border border-border/70 bg-white p-5 shadow-[0_24px_44px_rgba(15,61,56,0.12)] sm:right-6">
             <div className="border-b border-border/70 pb-4">
-              <BrandWordmark compact />
+              <BrandLogo compact />
             </div>
 
             <nav className="mt-4 flex flex-col gap-2">

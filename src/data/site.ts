@@ -60,6 +60,16 @@ export const siteConfig = {
         "La CTA principale e WhatsApp, scelta pratica per favorire il primo contatto senza introdurre flussi complessi.",
     },
   ],
+  servicesIntro: {
+    title: "Servizi chiari, presentati come una vera pagina di orientamento.",
+    description:
+      "La pagina servizi deve aiutare a capire subito cosa fa Virtus, quali aree copre e come iniziare il primo contatto senza passaggi inutili.",
+    points: [
+      "Ogni servizio ha una pagina dedicata con struttura leggibile.",
+      "I professionisti collegati sono visibili in modo piu ordinato.",
+      "La CTA resta sempre semplice: WhatsApp o richiesta informazioni.",
+    ],
+  },
   processSteps: [
     {
       title: "Scopri il servizio",
@@ -101,6 +111,25 @@ export const siteConfig = {
   },
   aboutText:
     "Virtus e pensato come uno spazio in cui diverse competenze dialogano per offrire percorsi professionali orientati alla persona. Il sito vetrina deve riflettere questa identita: essere chiaro, affidabile, leggibile e semplice da evolvere nel tempo.",
+  aboutIntro:
+    "Virtus nasce come centro multiservizio orientato a salute, benessere e performance. L'idea di fondo e costruire un luogo in cui diverse competenze possano convivere in modo coerente, offrendo alle persone un punto di riferimento piu chiaro e piu affidabile.",
+  aboutApproach: [
+    {
+      title: "Ascolto del bisogno",
+      description:
+        "Ogni percorso parte dalla comprensione della richiesta, senza linguaggio superfluo e senza creare complessita inutili.",
+    },
+    {
+      title: "Competenze complementari",
+      description:
+        "La presenza di professionisti diversi aiuta a costruire un'identita di centro piu solida e una comunicazione piu credibile.",
+    },
+    {
+      title: "Contatto semplice",
+      description:
+        "Anche online l'approccio resta pratico: il sito orienta, poi il primo passo passa da un contatto chiaro e diretto.",
+    },
+  ],
   aboutPillars: [
     {
       title: "Salute",
@@ -128,6 +157,12 @@ export const siteConfig = {
     "Far capire con immediatezza quali servizi offre il centro.",
     "Valorizzare la presenza di un team multidisciplinare.",
     "Portare l'utente a richiedere informazioni in modo semplice.",
+  ],
+  aboutWhyChoose: [
+    "Perche presenta i servizi in modo chiaro e senza tono artificiale.",
+    "Perche valorizza il team e il carattere multidisciplinare del centro.",
+    "Perche mette il primo contatto al centro dell'esperienza.",
+    "Perche e gia pronto a crescere senza diventare complicato.",
   ],
   contacts: {
     whatsappDisplay: "[WHATSAPP DA INSERIRE]",
