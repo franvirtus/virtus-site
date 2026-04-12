@@ -30,8 +30,8 @@ export default function ContactsPage() {
   return (
     <div className="px-4 py-10 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <section className="overflow-hidden rounded-[2rem] border border-border/70 bg-white shadow-[0_24px_52px_rgba(15,61,56,0.06)]">
-          <div className="grid gap-8 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1.05fr_0.95fr] lg:px-10">
+        <section className="border-b border-border/60 pb-10">
+          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <div>
               <SectionHeading
                 eyebrow="Contatti"
@@ -57,20 +57,17 @@ export default function ContactsPage() {
               </div>
             </div>
 
-            <aside className="rounded-[1.8rem] bg-brand-dark p-6 text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/58">
+            <aside className="border-l border-border/60 pl-0 lg:pl-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground/45">
                 Prima di scriverci
               </p>
-              <div className="mt-5 space-y-3">
+              <div className="mt-5 space-y-4">
                 {contactSteps.map((step, index) => (
-                  <div
-                    key={step}
-                    className="rounded-[1.2rem] border border-white/10 bg-white/6 px-4 py-4"
-                  >
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                  <div key={step} className="border-l-2 border-brand/12 pl-4">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/45">
                       Passo {index + 1}
                     </p>
-                    <p className="mt-2 text-sm leading-7 text-white/84">{step}</p>
+                    <p className="mt-2 text-sm leading-7 text-foreground/74">{step}</p>
                   </div>
                 ))}
               </div>
@@ -79,7 +76,7 @@ export default function ContactsPage() {
         </section>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[0.92fr_1.08fr]">
-          <section className="rounded-[1.9rem] border border-border/70 bg-white p-8 shadow-[0_18px_40px_rgba(15,61,56,0.05)]">
+          <section className="border-t border-border/60 pt-6">
             <h2 className="text-2xl font-semibold text-brand-dark">Contatti rapidi</h2>
             <div className="mt-6 space-y-4">
               {contactCards.map((item) => (
@@ -88,7 +85,7 @@ export default function ContactsPage() {
                   href={item.href}
                   target={item.label === "WhatsApp" ? "_blank" : undefined}
                   rel={item.label === "WhatsApp" ? "noreferrer" : undefined}
-                  className="block rounded-[1.45rem] border border-border/65 bg-surface-muted px-5 py-5 transition hover:border-brand/25 hover:bg-white"
+                  className="block border-l-2 border-brand/12 pl-4 transition hover:border-brand/25"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">
                     {item.label}
@@ -99,9 +96,9 @@ export default function ContactsPage() {
             </div>
           </section>
 
-          <section className="rounded-[1.9rem] border border-border/70 bg-white p-8 shadow-[0_18px_40px_rgba(15,61,56,0.05)]">
+          <section className="border-t border-border/60 pt-6">
             <div className="grid gap-5 sm:grid-cols-2">
-              <div className="rounded-[1.45rem] border border-border/65 bg-surface-muted p-5">
+              <div className="border-l-2 border-brand/12 pl-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">
                   Indirizzo
                 </p>
@@ -109,7 +106,7 @@ export default function ContactsPage() {
                   {siteConfig.contacts.address}
                 </p>
               </div>
-              <div className="rounded-[1.45rem] border border-border/65 bg-surface-muted p-5">
+              <div className="border-l-2 border-brand/12 pl-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">
                   Orari
                 </p>
@@ -121,7 +118,7 @@ export default function ContactsPage() {
               </div>
             </div>
 
-            <div className="mt-6 rounded-[1.45rem] border border-border/65 bg-brand-soft px-5 py-5">
+            <div className="mt-8 border-l-2 border-brand/12 pl-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">
                 Nota pratica
               </p>

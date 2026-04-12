@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { BrandLogo } from "@/components/brand-logo";
 import { CtaBanner } from "@/components/cta-banner";
 import { SectionHeading } from "@/components/section-heading";
 import { ServiceCard } from "@/components/service-card";
@@ -21,25 +20,21 @@ export const metadata = createPageMetadata({
 export default function HomePage() {
   return (
     <div className="pb-16">
-      <section className="px-4 pt-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl overflow-hidden rounded-[2.2rem] border border-border/70 bg-white shadow-[0_26px_60px_rgba(15,61,56,0.08)]">
-          <div className="grid gap-10 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:py-12">
-            <div className="max-w-3xl">
-              <div className="inline-flex rounded-[1.6rem] border border-border/60 bg-surface-muted px-5 py-4">
-                <BrandLogo />
-              </div>
-
-              <span className="mt-6 inline-flex rounded-full border border-brand/10 bg-brand-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark">
+      <section className="px-4 pt-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl border-b border-border/60 pb-14">
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+            <div className="max-w-3xl pt-4">
+              <span className="inline-flex border border-brand/10 bg-brand-soft px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-brand-dark">
                 Centro multiservizio
               </span>
 
-              <h1 className="mt-6 max-w-3xl font-display text-4xl leading-[1.05] text-brand-dark sm:text-5xl lg:text-[3.65rem]">
+              <h1 className="mt-6 max-w-3xl font-display text-4xl leading-[1.04] text-brand-dark sm:text-5xl lg:text-[3.55rem]">
                 Professionisti e servizi per salute, benessere e performance.
               </h1>
-              <p className="mt-6 max-w-2xl text-base leading-8 text-foreground/78 sm:text-lg">
-                Virtus presenta i servizi del centro in modo chiaro e leggibile, per
-                aiutare chi visita il sito a capire subito da dove partire e come
-                contattarci.
+              <p className="mt-5 max-w-2xl text-base leading-8 text-foreground/76 sm:text-lg">
+                Virtus e un centro multiservizio che presenta in modo chiaro aree,
+                professionisti e modalita di primo contatto, per aiutare le persone a
+                capire subito dove orientarsi.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -59,53 +54,48 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              <div className="mt-10 grid gap-5 sm:grid-cols-3">
                 {siteConfig.homeStats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-[1.35rem] border border-border/60 bg-surface-muted px-5 py-4"
-                  >
+                  <div key={stat.label} className="border-l-2 border-brand/12 pl-4">
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">
                       {stat.label}
                     </p>
-                    <p className="mt-2 text-lg font-semibold text-brand-dark">{stat.value}</p>
+                    <p className="mt-2 text-lg font-semibold leading-7 text-brand-dark">
+                      {stat.value}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <aside className="flex flex-col gap-4">
-              <div className="rounded-[1.9rem] bg-brand-dark p-6 text-white">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/58">
-                  Primo orientamento
+            <aside className="border-l border-border/60 pl-0 lg:pl-8">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/45">
+                  Virtus in breve
                 </p>
-                <div className="mt-5 space-y-3">
+                <div className="mt-5 space-y-5">
                   {siteConfig.heroSupportingPoints.map((point) => (
-                    <div
+                    <p
                       key={point}
-                      className="rounded-[1.25rem] border border-white/10 bg-white/6 px-4 py-4"
+                      className="border-l-2 border-brand/12 pl-4 text-sm leading-7 text-foreground/74"
                     >
-                      <p className="text-sm leading-7 text-white/84">{point}</p>
-                    </div>
+                      {point}
+                    </p>
                   ))}
                 </div>
               </div>
-
-              <div className="rounded-[1.9rem] border border-border/60 bg-surface-muted p-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/45">
-                  Servizi in evidenza
+              <div className="mt-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/45">
+                  Aree principali
                 </p>
-                <div className="mt-5 grid gap-3">
-                  {featuredServices.slice(0, 3).map((service) => (
-                    <div
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {featuredServices.slice(0, 4).map((service) => (
+                    <span
                       key={service.slug}
-                      className="rounded-[1.2rem] border border-border/60 bg-white px-4 py-4"
+                      className="border border-border/70 px-3 py-2 text-sm text-foreground/76"
                     >
-                      <p className="text-sm font-semibold text-brand-dark">{service.title}</p>
-                      <p className="mt-2 text-sm leading-7 text-foreground/72">
-                        {service.shortDescription}
-                      </p>
-                    </div>
+                      {service.title}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -136,8 +126,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-4 py-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl rounded-[2rem] border border-border/70 bg-surface-muted px-6 py-10 sm:px-10">
+      <section className="px-4 py-2 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl bg-surface-muted/45 px-0 py-8 sm:py-10">
           <SectionHeading
             eyebrow="A chi ci rivolgiamo"
             title="Una struttura pensata per chi cerca orientamento, chiarezza e contatto rapido."
@@ -147,9 +137,9 @@ export default function HomePage() {
             {siteConfig.homeAudiences.map((audience) => (
               <article
                 key={audience.title}
-                className="rounded-[1.6rem] border border-border/60 bg-white px-6 py-6"
+                className="border-t border-border/60 pt-5"
               >
-                <h2 className="text-xl font-semibold text-brand-dark">{audience.title}</h2>
+                <h2 className="text-xl font-semibold leading-8 text-brand-dark">{audience.title}</h2>
                 <p className="mt-3 text-sm leading-7 text-foreground/74">
                   {audience.description}
                 </p>
@@ -171,9 +161,9 @@ export default function HomePage() {
             {siteConfig.whyVirtus.map((item) => (
               <article
                 key={item.title}
-                className="rounded-[1.7rem] border border-border/70 bg-white px-6 py-7 shadow-[0_16px_36px_rgba(15,61,56,0.05)]"
+                className="border-t border-border/60 pt-5"
               >
-                <h2 className="text-xl font-semibold text-brand-dark">{item.title}</h2>
+                <h2 className="text-xl font-semibold leading-8 text-brand-dark">{item.title}</h2>
                 <p className="mt-4 text-sm leading-8 text-foreground/74">
                   {item.description}
                 </p>
@@ -184,7 +174,7 @@ export default function HomePage() {
       </section>
 
       <section className="px-4 py-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl rounded-[2.1rem] border border-border/70 bg-white px-6 py-10 shadow-[0_22px_54px_rgba(15,61,56,0.06)] sm:px-10">
+        <div className="mx-auto max-w-6xl border-t border-border/60 px-0 py-10">
           <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
             <div>
               <SectionHeading
@@ -206,7 +196,7 @@ export default function HomePage() {
               {featuredProfessionals.map((professional) => (
                 <article
                   key={professional.name}
-                  className="rounded-[1.5rem] border border-border/65 bg-surface-muted px-5 py-5"
+                  className="border-l border-border/60 pl-4"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">
                     {professional.area}
@@ -239,7 +229,7 @@ export default function HomePage() {
             {siteConfig.homepageFaq.map((item) => (
               <article
                 key={item.question}
-                className="rounded-[1.5rem] border border-border/70 bg-white p-6 shadow-[0_14px_32px_rgba(15,61,56,0.05)]"
+                className="border-t border-border/60 pt-5"
               >
                 <h2 className="text-lg font-semibold leading-8 text-brand-dark">
                   {item.question}

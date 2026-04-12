@@ -6,11 +6,9 @@ import { siteConfig } from "@/data/site";
 export function SiteFooter() {
   return (
     <footer className="mt-16 bg-brand-dark text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.15fr_0.85fr_0.9fr] lg:px-8">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.05fr_0.85fr_0.9fr] lg:px-8">
         <div className="max-w-md">
-          <div className="inline-flex rounded-[1.6rem] bg-white px-4 py-3 shadow-[0_18px_36px_rgba(0,0,0,0.14)]">
-            <BrandLogo />
-          </div>
+          <BrandLogo compact />
           <p className="mt-5 text-sm leading-8 text-white/72">
             Sito vetrina pubblico di Virtus, costruito per presentare i servizi,
             orientare il primo contatto e rendere piu semplice capire da dove partire.
@@ -58,19 +56,19 @@ export function SiteFooter() {
             Contatti
           </p>
           <div className="mt-5 space-y-4">
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/6 px-5 py-4">
+            <div className="border-l border-white/18 pl-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/52">
                 WhatsApp
               </p>
               <p className="mt-2 text-sm text-white/82">{siteConfig.contacts.whatsappDisplay}</p>
             </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/6 px-5 py-4">
+            <div className="border-l border-white/18 pl-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/52">
                 Telefono
               </p>
               <p className="mt-2 text-sm text-white/82">{siteConfig.contacts.phone}</p>
             </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/6 px-5 py-4">
+            <div className="border-l border-white/18 pl-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/52">
                 Indirizzo
               </p>

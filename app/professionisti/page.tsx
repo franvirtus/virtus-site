@@ -20,7 +20,7 @@ export default function ProfessionalsPage() {
   return (
     <div className="px-4 py-10 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <div className="rounded-[2rem] border border-border/70 bg-white px-6 py-10 shadow-[0_24px_52px_rgba(15,61,56,0.06)] sm:px-8">
+        <div className="border-b border-border/60 pb-10">
           <SectionHeading
             eyebrow="Professionisti"
             title="Un team multidisciplinare presentato in modo piu ordinato, leggibile e professionale."
@@ -28,7 +28,7 @@ export default function ProfessionalsPage() {
           />
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <div className="rounded-[1.4rem] border border-border/60 bg-surface-muted px-5 py-5">
+            <div className="border-l-2 border-brand/12 pl-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">
                 Professionisti attivi
               </p>
@@ -36,7 +36,7 @@ export default function ProfessionalsPage() {
                 {activeProfessionals.length}
               </p>
             </div>
-            <div className="rounded-[1.4rem] border border-border/60 bg-surface-muted px-5 py-5">
+            <div className="border-l-2 border-brand/12 pl-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">
                 Aree presenti
               </p>
@@ -44,7 +44,7 @@ export default function ProfessionalsPage() {
                 {groupedProfessionals.length}
               </p>
             </div>
-            <div className="rounded-[1.4rem] border border-border/60 bg-surface-muted px-5 py-5">
+            <div className="border-l-2 border-brand/12 pl-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">
                 Profili in aggiornamento
               </p>
@@ -59,16 +59,16 @@ export default function ProfessionalsPage() {
           {groupedProfessionals.map(([group, members]) => (
             <section
               key={group}
-              className="rounded-[1.9rem] border border-border/70 bg-white p-7 shadow-[0_18px_40px_rgba(15,61,56,0.05)]"
+              className="border-t border-border/60 pt-6"
             >
-              <div className="flex flex-col gap-3 border-b border-border/70 pb-5 sm:flex-row sm:items-end sm:justify-between">
+              <div className="flex flex-col gap-3 pb-5 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/45">
                     Area
                   </p>
                   <h2 className="mt-2 text-2xl font-semibold text-brand-dark">{group}</h2>
                 </div>
-                <span className="inline-flex rounded-full bg-brand-soft px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand-dark">
+                <span className="inline-flex border border-brand/10 bg-brand-soft px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand-dark">
                   {members.length} professionist{members.length > 1 ? "i" : "a"}
                 </span>
               </div>
@@ -77,7 +77,7 @@ export default function ProfessionalsPage() {
                 {members.map((professional) => (
                   <article
                     key={professional.name}
-                    className="rounded-[1.5rem] border border-border/60 bg-surface-muted px-5 py-5"
+                    className="border-l border-border/60 pl-4"
                   >
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">
                       {professional.area}
@@ -95,8 +95,8 @@ export default function ProfessionalsPage() {
           ))}
         </div>
 
-        <section className="mt-10 rounded-[1.9rem] border border-border/70 bg-white p-7 shadow-[0_18px_40px_rgba(15,61,56,0.05)]">
-          <div className="flex flex-col gap-3 border-b border-border/70 pb-5 sm:flex-row sm:items-end sm:justify-between">
+        <section className="mt-10 border-t border-border/60 pt-6">
+          <div className="flex flex-col gap-3 pb-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/45">
                 Profili non ancora assegnati
@@ -105,7 +105,7 @@ export default function ProfessionalsPage() {
                 Area in aggiornamento
               </h2>
             </div>
-            <span className="inline-flex rounded-full border border-brand/15 bg-brand-soft px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand-dark">
+            <span className="inline-flex border border-brand/15 bg-brand-soft px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand-dark">
               In aggiornamento
             </span>
           </div>
@@ -114,13 +114,13 @@ export default function ProfessionalsPage() {
             {updatingProfessionals.map((professional) => (
               <article
                 key={professional.name}
-                className="rounded-[1.5rem] border border-dashed border-border bg-surface-muted px-5 py-5"
+                className="border-l border-dashed border-border pl-4"
               >
                 <div className="flex items-center justify-between gap-3">
                   <h3 className="text-lg font-semibold leading-tight text-brand-dark">
                     {professional.name}
                   </h3>
-                  <span className="rounded-full border border-brand/15 bg-white px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-brand-dark">
+                  <span className="border border-brand/15 bg-brand-soft px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-brand-dark">
                     Area in aggiornamento
                   </span>
                 </div>
