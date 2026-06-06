@@ -11,12 +11,13 @@ export function SiteFooter() {
           <BrandLogo compact />
           <p className="mt-5 text-sm leading-8 text-white/72">
             Sito vetrina pubblico di Virtus, costruito per presentare i servizi,
-            orientare il primo contatto e rendere piu semplice capire da dove partire.
+            orientare il primo contatto e rendere più semplice capire da dove partire.
           </p>
           <a
             href={siteConfig.contacts.whatsappHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
+            aria-label="Contattaci su WhatsApp (si apre in una nuova finestra)"
             className="mt-6 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-brand-dark transition hover:bg-brand-soft"
           >
             Scrivici su WhatsApp

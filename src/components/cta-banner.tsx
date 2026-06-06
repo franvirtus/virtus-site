@@ -20,14 +20,15 @@ export function CtaBanner() {
           <a
             href={siteConfig.contacts.whatsappHref}
             target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-brand-dark transition hover:bg-brand-soft"
+            rel="noreferrer noopener"
+            aria-label="Contattaci su WhatsApp (si apre in una nuova finestra)"
+            className="btn-primary inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-brand-dark transition hover:bg-brand-soft"
           >
             Scrivici su WhatsApp
           </a>
           <Link
             href="/servizi"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+            className="btn-outline inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
           >
             Scopri i servizi
           </Link>

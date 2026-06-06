@@ -37,14 +37,15 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
                 <a
                   href={siteConfig.contacts.whatsappHref}
                   target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(15,109,99,0.18)] transition hover:bg-brand-dark"
+                  rel="noreferrer noopener"
+                  aria-label="Contattaci su WhatsApp (si apre in una nuova finestra)"
+                  className="btn-primary inline-flex items-center justify-center rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(15,109,99,0.18)] transition hover:bg-brand-dark"
                 >
                   Scrivici su WhatsApp
                 </a>
                 <Link
                   href="/servizi"
-                  className="inline-flex items-center justify-center rounded-full border border-brand/15 bg-brand-soft px-6 py-3.5 text-sm font-semibold text-brand-dark transition hover:border-brand/35"
+                  className="btn-outline inline-flex items-center justify-center rounded-full border border-brand/15 bg-brand-soft px-6 py-3.5 text-sm font-semibold text-brand-dark transition hover:border-brand/35"
                 >
                   Torna ai servizi
                 </Link>
@@ -90,7 +91,7 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           <section className="rounded-[1.9rem] border border-border/70 bg-white p-8 shadow-[0_18px_40px_rgba(15,61,56,0.05)]">
-            <h2 className="text-2xl font-semibold text-brand-dark">Per chi e utile</h2>
+            <h2 className="text-2xl font-semibold text-brand-dark">Per chi è utile</h2>
             <div className="mt-6 space-y-3">
               {service.audience.map((item) => (
                 <div
@@ -104,7 +105,7 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
           </section>
 
           <section className="rounded-[1.9rem] border border-border/70 bg-white p-8 shadow-[0_18px_40px_rgba(15,61,56,0.05)]">
-            <h2 className="text-2xl font-semibold text-brand-dark">Quando puo essere utile</h2>
+            <h2 className="text-2xl font-semibold text-brand-dark">Quando può essere utile</h2>
             <div className="mt-6 space-y-3">
               {service.whenHelpful.map((item) => (
                 <div
@@ -148,11 +149,11 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
               Contatto finale
             </p>
             <h2 className="mt-4 font-display text-3xl leading-tight">
-              Vuoi capire se questo servizio e il punto giusto da cui partire?
+              Vuoi capire se questo servizio è il punto giusto da cui partire?
             </h2>
             <p className="mt-4 text-sm leading-8 text-white/82">
               Scrivici su WhatsApp e indicaci brevemente la tua esigenza. Il sito ti aiuta
-              a orientarti, ma il primo contatto diretto resta il modo piu semplice per
+              a orientarti, ma il primo contatto diretto resta il modo più semplice per
               capire come muoverti.
             </p>
             <p className="mt-4 text-sm leading-8 text-white/82">{service.pageNote}</p>
@@ -161,20 +162,46 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
               <a
                 href={siteConfig.contacts.whatsappHref}
                 target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-brand-dark transition hover:bg-brand-soft"
+                rel="noreferrer noopener"
+                aria-label="Contattaci su WhatsApp (si apre in una nuova finestra)"
+                className="btn-primary inline-flex items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-brand-dark transition hover:bg-brand-soft"
               >
                 Scrivici su WhatsApp
               </a>
               <Link
                 href="/contatti"
-                className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="btn-outline inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
               >
                 Richiedi informazioni
               </Link>
             </div>
           </section>
         </div>
+
+        {service.faq && service.faq.length > 0 && (
+          <section className="mt-6 rounded-[1.9rem] border border-border/70 bg-white p-8 shadow-[0_18px_40px_rgba(15,61,56,0.05)]">
+            <h2 className="text-2xl font-semibold text-brand-dark">
+              Domande frequenti su {service.title.toLowerCase()}
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-foreground/65">
+              Le risposte alle domande più comuni su questo servizio.
+            </p>
+
+            <div className="mt-8 grid gap-6 lg:grid-cols-3">
+              {service.faq.map((item) => (
+                <article
+                  key={item.question}
+                  className="border-t border-border/60 pt-5"
+                >
+                  <h3 className="text-base font-semibold leading-7 text-brand-dark">
+                    {item.question}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-foreground/74">{item.answer}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

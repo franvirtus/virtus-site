@@ -11,8 +11,8 @@
   --brand-soft: #dcece8;
   --accent: #d58936;
   --shadow: 0 18px 50px rgba(15, 61, 56, 0.08);
-  --font-sans-stack: "Aptos", "Segoe UI", "Helvetica Neue", sans-serif;
-  --font-display-stack: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  --font-sans-stack: var(--font-dm-sans, "Aptos", "Segoe UI", "Helvetica Neue", sans-serif);
+  --font-display-stack: var(--font-dm-serif, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif);
 }
 
 @theme inline {
@@ -54,4 +54,102 @@ a {
 
 ::selection {
   background: rgba(15, 109, 99, 0.18);
+}
+
+/* ── Skip to content ── */
+.skip-nav {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-nav:focus {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 9999;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1.25rem;
+  background: var(--brand-dark);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(15, 109, 99, 0.5);
+}
+
+/* ── Focus rings ── */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 9999px;
+}
+
+/* ── Scroll reveal animations ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-fast {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-fast.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Button micro-interactions ── */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: background-color 0.2s ease, transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0px);
+}
+
+.btn-outline {
+  transform: translateY(0);
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.btn-outline:hover {
+  transform: translateY(-1px);
+}
+
+.btn-outline:active {
+  transform: translateY(0px);
 }
