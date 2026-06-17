@@ -1,256 +1,307 @@
-// Virtus · app/page.tsx — Home
-// Faithful port of redesign/Virtus Home v2.html. Server component; the header
-// (transparent over the hero) and reveal animations come from SiteChrome.
+import type { Metadata } from "next";
 import Link from "next/link";
+import { SiteHeader, SiteFooter, WhatsappFab, WA } from "@/components/SiteChrome";
 import Icon from "@/components/Icon";
-import { SiteHeader, SiteFooter, WhatsappFab, WA, TEL } from "@/components/SiteChrome";
+import { professionals } from "@/data/professionals";
+import { services } from "@/data/services";
+import ServiceFinder from "@/components/ServiceFinder";
 
-// Placeholder imagery — swap the src's for photos in /public.
-const IMG = {
-  hero: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1100&q=80",
-  fitness: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80",
-  pilates: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=900&q=80",
-  reformer: "https://images.unsplash.com/photo-1591258370814-01609b341790?auto=format&fit=crop&w=700&q=80",
-  benessere: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=700&q=80",
-  recupero: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=700&q=80",
-  sedeCorfu: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80",
-  sedeMontello: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=900&q=80",
+export const metadata: Metadata = {
+  title: "Virtus | Centro multidisciplinare di salute a Brescia",
+  description:
+    "Fisioterapia, nutrizione, osteopatia, logopedia, ortottica, ostetricia, massoterapia. Professionisti diversi, un unico centro pensato intorno a te.",
 };
 
-export default function Home() {
+const activeProfessionals = professionals.filter(p => !p.isUpdating);
+
+const SERVICE_ICONS: Record<string, string> = {
+  fisioterapia:          "activity",
+  nutrizione:            "apple",
+  osteopatia:            "hand",
+  "osteopatia-pediatrica": "baby",
+  ortottica:             "eye",
+  logopedia:             "mic",
+  ostetricia:            "heart",
+  massoterapia:          "wind",
+};
+
+const NEED_CARDS = [
+  {
+    icon: "zap" as const,
+    title: "Hai un dolore o un disturbo",
+    desc: "Schiena, articolazioni, cervicale, voce, vista: parti dal professionista giusto senza perdere tempo.",
+    tags: ["Fisioterapia", "Osteopatia", "Logopedia", "Ortottica"],
+  },
+  {
+    icon: "compass" as const,
+    title: "Non sai da dove iniziare",
+    desc: "Se il tuo bisogno non è ancora chiaro, usa lo strumento di orientamento qui sopra o scrivici direttamente.",
+    tags: ["Orientamento", "Prima valutazione"],
+  },
+  {
+    icon: "users" as const,
+    title: "Stai seguendo tuo figlio",
+    desc: "Sviluppo, linguaggio, vista, crescita: accompagniamo i bambini con approcci delicati e adatti alla loro età.",
+    tags: ["Osteopatia pediatrica", "Logopedia", "Ortottica"],
+  },
+  {
+    icon: "heart" as const,
+    title: "Gravidanza o post-parto",
+    desc: "Prima, durante e dopo: l'ostetrica e gli altri professionisti del centro seguono la donna in ogni fase.",
+    tags: ["Ostetricia", "Osteopatia", "Nutrizione"],
+  },
+  {
+    icon: "trending-up" as const,
+    title: "Vuoi prenderti cura della salute",
+    desc: "Alimentazione, controllo del peso, prevenzione, qualità del movimento: costruiamo un percorso su misura.",
+    tags: ["Nutrizione", "Fisioterapia", "Massoterapia"],
+  },
+  {
+    icon: "refresh-cw" as const,
+    title: "Recupero da infortunio o intervento",
+    desc: "Tornare all'attività quotidiana o sportiva nel modo corretto, con un piano di recupero personalizzato.",
+    tags: ["Fisioterapia", "Osteopatia", "Massoterapia"],
+  },
+];
+
+const METHOD_STEPS = [
+  {
+    num: "01",
+    icon: "message-circle" as const,
+    title: "Ascolto",
+    desc: "Ogni percorso inizia da una conversazione. Capiamo la tua storia, i tuoi obiettivi e i tuoi dubbi.",
+  },
+  {
+    num: "02",
+    icon: "search" as const,
+    title: "Valutazione",
+    desc: "Il professionista coinvolto fa una valutazione approfondita prima di costruire qualsiasi percorso.",
+  },
+  {
+    num: "03",
+    icon: "git-merge" as const,
+    title: "Integrazione",
+    desc: "Quando utile, più figure lavorano insieme intorno alla stessa persona — fisioterapia, nutrizione, osteopatia.",
+  },
+  {
+    num: "04",
+    icon: "check-circle" as const,
+    title: "Continuità",
+    desc: "Ti seguiamo nel tempo, adattando il percorso ai progressi reali, non a protocolli fissi.",
+  },
+];
+
+export default function HomePage() {
   return (
     <>
-      <SiteHeader transparent />
+      <SiteHeader transparent active={null} />
 
-      {/* HERO */}
-      <section className="hero" id="top">
+      {/* ── HERO ────────────────────────────────────────── */}
+      <section className="hero">
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">Centro fitness, movimento &amp; benessere · Brescia</p>
+            <span className="eyebrow">Centro multidisciplinare · Brescia</span>
             <h1>
-              <span className="ln">Allenati meglio.</span>
-              <span className="ln">Muoviti meglio.</span>
-              <span className="ln hl">Stai meglio.</span>
+              <span className="ln">Professionisti</span>
+              <span className="ln">diversi,</span>
+              <span className="ln hl">un percorso</span>
+              <span className="ln hl">che ti ascolta.</span>
             </h1>
             <p className="lead">
-              Virtus non è una palestra qualsiasi: è il posto dove non vieni solo ad
-              allenarti, ma costruisci un corpo che funziona meglio. Allenamento su
-              misura, Pilates e Reformer, seguiti da professionisti — in due sedi a
-              Brescia.
+              Fisioterapia, nutrizione, osteopatia, logopedia, ortottica,
+              ostetricia, massoterapia. Tutto in un unico centro pensato intorno
+              alla persona.
             </p>
             <div className="hero-cta">
               <Link className="btn btn-red" href="/contatti">
                 <Icon name="calendar-check" />
-                Prenota una prova
+                Prenota una consulenza
               </Link>
-              <Link className="btn btn-ghost-l" href="#servizi">
-                Scopri i percorsi
-              </Link>
+              <a className="btn btn-ghost-l" href={WA} target="_blank" rel="noopener noreferrer">
+                <Icon name="message-circle" />
+                Scrivici su WhatsApp
+              </a>
             </div>
             <div className="hero-trust">
-              <div className="ht"><Icon name="map-pin" /><span>2 sedi a Brescia</span></div>
-              <div className="ht"><Icon name="user-round-cog" /><span>Percorsi 100% su misura</span></div>
-              <div className="ht"><Icon name="heart-pulse" /><span>Fitness e benessere insieme</span></div>
+              <div className="ht">
+                <Icon name="award" />
+                <span>Professionisti qualificati</span>
+              </div>
+              <div className="ht">
+                <Icon name="git-merge" />
+                <span>Approccio multidisciplinare</span>
+              </div>
+              <div className="ht">
+                <Icon name="shield-check" />
+                <span>Percorsi personalizzati</span>
+              </div>
             </div>
           </div>
+
           <div className="hero-media">
-            <div className="big">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={IMG.hero} alt="Allenamento a Virtus" />
-            </div>
-            <div className="hero-tag">Prima prova senza impegno</div>
+            <div className="big" />
+            <div className="hero-tag">Brescia</div>
             <div className="hero-card">
-              <div className="ic"><Icon name="check" /></div>
+              <div className="ic"><Icon name="users" /></div>
               <div>
-                <div className="t">Sei seguito, sempre</div>
-                <div className="s">Valutazione e percorso su misura</div>
+                <div className="t">8 aree specialistiche</div>
+                <div className="s">Un team integrato al tuo fianco</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* STATEMENT */}
-      <section className="statement">
-        <div className="wrap statement-in">
-          <div className="reveal">
-            <h2>
-              Non vieni solo ad allenarti:{" "}
-              <span className="red">costruisci un corpo che funziona meglio.</span>
-            </h2>
-            <p style={{ marginTop: "1.2rem" }}>
-              Virtus unisce allenamento, Pilates, Reformer, prevenzione, postura e
-              recupero funzionale in un unico centro. Un approccio serio ma
-              accessibile, pensato per le persone vere — non per gli atleti delle
-              copertine.
-            </p>
-          </div>
-          <div className="vals reveal">
-            <div className="v"><Icon name="target" /><div><b>Su misura davvero.</b> <span>Niente schede preconfezionate: il percorso parte da te.</span></div></div>
-            <div className="v"><Icon name="users-round" /><div><b>Professionisti accanto.</b> <span>Vieni ascoltato, valutato e accompagnato.</span></div></div>
-            <div className="v"><Icon name="activity" /><div><b>Movimento che dura.</b> <span>Risultati che restano, dentro e fuori dal centro.</span></div></div>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVIZI */}
-      <section className="block" id="servizi">
+      {/* ── ORIENTAMENTO (ServiceFinder) ────────────────── */}
+      <section className="block" style={{ background: "var(--beige)" }}>
         <div className="wrap">
           <div className="sec-head reveal">
-            <p className="eyebrow">Cosa puoi fare da Virtus</p>
-            <h2>Un centro, tante strade per stare meglio.</h2>
+            <span className="eyebrow">Strumento di orientamento</span>
+            <h2>Non sai da dove partire?</h2>
             <p>
-              Allenamento, movimento consapevole e benessere: scegli da dove partire,
-              al resto pensiamo insieme.
+              Rispondi a tre domande e ti indichiamo il professionista più adatto
+              al tuo bisogno. Lo strumento ha funzione orientativa, non diagnostica.
             </p>
           </div>
-          <div className="svc-grid">
-            <Link className="svc lg reveal" href="/servizi/pilates-reformer">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={IMG.fitness} alt="" />
-              <div className="ic"><Icon name="dumbbell" /></div>
-              <h3>Fitness &amp; allenamento personalizzato</h3>
-              <p>Percorsi su misura per forza, forma fisica, postura e mobilità. Seguiti, non lasciati a una scheda.</p>
-            </Link>
-            <Link className="svc md reveal" href="/servizi/pilates-reformer">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={IMG.pilates} alt="" />
-              <div className="ic"><Icon name="activity" /></div>
-              <h3>Pilates</h3>
-              <p>Controllo, postura e movimento consapevole. Tonifichi e impari a muoverti meglio.</p>
-            </Link>
-            <Link className="svc sm reveal" href="/servizi/pilates-reformer">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={IMG.reformer} alt="" />
-              <div className="ic"><Icon name="git-commit-horizontal" /></div>
-              <h3>Pilates Reformer</h3>
-              <p>Lavoro di precisione sulla macchina: core, postura, mobilità e forza profonda.</p>
-            </Link>
-            <Link className="svc sm reveal" href="/servizi/pilates-reformer">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={IMG.benessere} alt="" />
-              <div className="ic"><Icon name="heart-pulse" /></div>
-              <h3>Benessere &amp; salute</h3>
-              <p>Un approccio integrato alla persona, con professionisti e servizi per la qualità della vita.</p>
-            </Link>
-            <Link className="svc sm reveal" href="/servizi/pilates-reformer">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={IMG.recupero} alt="" />
-              <div className="ic"><Icon name="accessibility" /></div>
-              <h3>Recupero, prevenzione &amp; postura</h3>
-              <p>Ti aiutiamo a muoverti senza dolore, prevenire i fastidi e tornare sicuro nel movimento.</p>
-            </Link>
+          <div className="finder-outer reveal">
+            <ServiceFinder />
           </div>
         </div>
       </section>
 
-      {/* PER CHI È */}
-      <section className="block who" id="perchi">
+      {/* ── DA DOVE PARTIRE (need cards) ────────────────── */}
+      <section className="block">
         <div className="wrap">
           <div className="sec-head reveal">
-            <p className="eyebrow">Per chi è Virtus</p>
-            <h2>Per chi vuole stare meglio. Davvero per tutti.</h2>
-            <p>Non serve essere già allenati. Serve voler iniziare — noi costruiamo il percorso intorno a te.</p>
+            <span className="eyebrow">Da dove partire?</span>
+            <h2>Ogni situazione ha il suo punto di partenza</h2>
+            <p>Qualunque sia il tuo bisogno, trovi qui il percorso giusto per iniziare.</p>
           </div>
-          <div className="who-grid">
-            <div className="who-item reveal"><Icon name="flame" /><div><b>Chi vuole rimettersi in forma</b><p>Dimagrimento e ricomposizione con un percorso guidato e sostenibile.</p></div></div>
-            <div className="who-item reveal"><Icon name="trophy" /><div><b>Sportivi</b><p>Forza, prevenzione e performance per chi già si allena o gareggia.</p></div></div>
-            <div className="who-item reveal"><Icon name="rotate-ccw" /><div><b>Chi riparte da zero</b><p>Sedentari o fermi da tempo: si comincia con calma, al tuo ritmo.</p></div></div>
-            <div className="who-item reveal"><Icon name="move" /><div><b>Postura &amp; mobilità</b><p>Per chi passa ore alla scrivania e vuole muoversi meglio.</p></div></div>
-            <div className="who-item reveal"><Icon name="shield-plus" /><div><b>Recupero da un dolore</b><p>Ritrova sicurezza nel movimento dopo un fastidio o uno stop.</p></div></div>
-            <div className="who-item reveal"><Icon name="users-round" /><div><b>Adulti e ragazzi</b><p>Percorsi adatti a ogni età, sempre seguiti da un professionista.</p></div></div>
+          <div className="need-grid">
+            {NEED_CARDS.map((c, i) => (
+              <div key={i} className="need-card reveal">
+                <div className="need-card-icon"><Icon name={c.icon} /></div>
+                <h3>{c.title}</h3>
+                <p>{c.desc}</p>
+                <div className="need-card-tags">
+                  {c.tags.map(t => <span key={t}>{t}</span>)}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* METODO */}
-      <section className="block" id="metodo">
+      {/* ── SERVIZI ─────────────────────────────────────── */}
+      <section className="block" style={{ background: "var(--ink)" }}>
+        <div className="wrap">
+          <div className="sec-head center reveal" style={{ color: "#fff" }}>
+            <span className="eyebrow" style={{ color: "var(--red)" }}>Le nostre aree</span>
+            <h2 style={{ color: "#fff" }}>Salute a tutto tondo</h2>
+            <p style={{ color: "rgba(255,255,255,.72)" }}>
+              Otto aree specialistiche che lavorano insieme, coordinate intorno
+              alle esigenze di ogni persona.
+            </p>
+          </div>
+          <div className="msvc-grid">
+            {services.map(s => (
+              <Link key={s.slug} href={s.href} className="msvc reveal">
+                <div className="ic"><Icon name={SERVICE_ICONS[s.slug] ?? "activity"} /></div>
+                <h3>{s.title}</h3>
+                <p>{s.shortDescription}</p>
+              </Link>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
+            <Link className="btn btn-ghost-l" href="/servizi">
+              <Icon name="grid" />
+              Tutti i servizi
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── METODO ──────────────────────────────────────── */}
+      <section className="block" style={{ background: "var(--beige)" }}>
         <div className="wrap">
           <div className="sec-head center reveal">
-            <p className="eyebrow">Come lavoriamo</p>
-            <h2>Il metodo Virtus, in quattro passi.</h2>
+            <span className="eyebrow">Il metodo Virtus</span>
+            <h2>Non un protocollo. Un percorso.</h2>
+            <p>
+              Ogni persona che entra a Virtus trova professionisti che si
+              parlano tra loro per costruire risposte integrate.
+            </p>
           </div>
           <div className="steps">
-            <div className="step reveal"><div className="num">01</div><div className="ic"><Icon name="ear" /></div><h4>Ti ascoltiamo</h4><p>Parliamo dei tuoi obiettivi, della tua storia e di come ti muovi oggi.</p></div>
-            <div className="step reveal"><div className="num">02</div><div className="ic"><Icon name="clipboard-list" /></div><h4>Valutiamo</h4><p>Una valutazione iniziale per capire da dove partire in sicurezza.</p></div>
-            <div className="step reveal"><div className="num">03</div><div className="ic"><Icon name="route" /></div><h4>Percorso su misura</h4><p>Costruiamo il programma giusto per te: allenamento, Pilates o recupero.</p></div>
-            <div className="step reveal"><div className="num">04</div><div className="ic"><Icon name="trending-up" /></div><h4>Ti seguiamo</h4><p>Ti accompagniamo passo passo e adattiamo il percorso ai progressi.</p></div>
+            {METHOD_STEPS.map((s, i) => (
+              <div key={i} className="step reveal">
+                <span className="num">{s.num}</span>
+                <div className="ic"><Icon name={s.icon} /></div>
+                <h4>{s.title}</h4>
+                <p>{s.desc}</p>
+              </div>
+            ))}
           </div>
           <p className="method-note reveal">
-            Da Virtus non sei mai lasciato solo. <span className="red">È questa la differenza.</span>
+            Il tutto in un unico centro, senza rimbalzare tra strutture diverse.
           </p>
         </div>
       </section>
 
-      {/* SEDI */}
-      <section className="block sedi" id="sedi">
+      {/* ── PROFESSIONISTI (teaser) ──────────────────────── */}
+      <section className="block">
         <div className="wrap">
           <div className="sec-head reveal">
-            <p className="eyebrow">Dove siamo</p>
-            <h2>Due sedi a Brescia, a due passi da te.</h2>
-            <p>Stessa cura, stesso metodo. Scegli la sede più comoda e vieni a trovarci per una prova.</p>
+            <span className="eyebrow">Il team</span>
+            <h2>Professionisti qualificati, non figure generiche</h2>
+            <p>
+              Fisioterapisti, nutrizionisti, osteopati, logopedisti, ortottiste,
+              ostetriche, massoterapisti: ciascuno specializzato nella propria
+              area, in dialogo con gli altri.
+            </p>
           </div>
-          <div className="sedi-grid">
-            <div className="sede reveal">
-              <div className="pic">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={IMG.sedeCorfu} alt="" />
-                <span className="pin"><Icon name="map-pin" />Sede Corfù</span>
+          <div className="prof-grid">
+            {activeProfessionals.slice(0, 8).map((p, i) => (
+              <div key={i} className="prof-card reveal">
+                <p className="prof-area">{p.area}</p>
+                <h4>{p.name}</h4>
+                <p className="prof-role">{p.role}</p>
               </div>
-              <div className="body">
-                <h3>Virtus · Via Corfù</h3>
-                <p className="addr"><Icon name="map-pin" />Via Corfù 71, Brescia</p>
-                <div className="row">
-                  <div><Icon name="clock" />Lun–Ven 8–21 · Sab 9–13</div>
-                  <div><Icon name="phone" />+39 030 000 0000</div>
-                </div>
-                <div className="acts">
-                  <a className="btn btn-red" href="https://maps.google.com/?q=Via+Corfù+71+Brescia" target="_blank" rel="noopener">
-                    <Icon name="navigation" />Indicazioni
-                  </a>
-                  <Link className="btn btn-ghost-d" href="/contatti">Prenota qui</Link>
-                </div>
-              </div>
-            </div>
-            <div className="sede reveal">
-              <div className="pic">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={IMG.sedeMontello} alt="" />
-                <span className="pin"><Icon name="map-pin" />Sede Montello</span>
-              </div>
-              <div className="body">
-                <h3>Virtus · Via Montello</h3>
-                <p className="addr"><Icon name="map-pin" />Via Montello 79, Brescia</p>
-                <div className="row">
-                  <div><Icon name="clock" />Lun–Ven 8–21 · Sab 9–13</div>
-                  <div><Icon name="phone" />+39 030 000 0000</div>
-                </div>
-                <div className="acts">
-                  <a className="btn btn-red" href="https://maps.google.com/?q=Via+Montello+79+Brescia" target="_blank" rel="noopener">
-                    <Icon name="navigation" />Indicazioni
-                  </a>
-                  <Link className="btn btn-ghost-d" href="/contatti">Prenota qui</Link>
-                </div>
-              </div>
-            </div>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
+            <Link className="btn btn-ghost-d" href="/professionisti">
+              <Icon name="users" />
+              Scopri tutto il team
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="block" id="contatti">
+      {/* ── CTA BAND ────────────────────────────────────── */}
+      <section className="block">
         <div className="wrap">
           <div className="cta-band reveal">
             <div className="in">
-              <p className="eyebrow" style={{ color: "rgba(255,255,255,.85)" }}>Inizia oggi</p>
-              <h2>Prenota la tua prova da Virtus.</h2>
+              <h2>Pronto a iniziare?</h2>
               <p>
-                Scrivici o chiamaci: capiamo insieme da dove partire e ti proponiamo il
-                percorso più adatto a te. Senza impegno.
+                Prenota una prima consulenza o scrivici su WhatsApp: ti aiutiamo
+                a capire da dove partire e quale professionista coinvolgere.
               </p>
               <div className="cta-actions">
-                <a className="btn btn-white" href={WA}><Icon name="message-circle" />Scrivici su WhatsApp</a>
-                <a className="btn btn-ghost-l" href={TEL}><Icon name="phone" />Chiama il centro</a>
+                <Link className="btn btn-white" href="/contatti">
+                  <Icon name="calendar-check" />
+                  Prenota una consulenza
+                </Link>
+                <a
+                  className="btn btn-ghost-l"
+                  href={WA}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon name="message-circle" />
+                  Scrivici su WhatsApp
+                </a>
               </div>
             </div>
           </div>

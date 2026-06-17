@@ -1,43 +1,34 @@
-// Virtus · SiteChrome.tsx
-// Header (sticky, transparent-over-hero or solid), mobile nav, footer and
-// the floating WhatsApp button — plus the scroll-reveal observer. One client
-// component so the marketing pages stay server components.
+// Virtus · SiteChrome.tsx — header, mobile nav, footer, FAB, reveal observer
 "use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Icon from "./Icon";
 
-/* ── Placeholder contacts — replace with the real values ───────────── */
-export const WA = "https://wa.me/390000000000";
+// Aggiornare con i recapiti reali del centro
+export const WA  = "https://wa.me/390000000000";
 export const TEL = "tel:+390300000000";
 
-type Active = "servizi" | "chi-siamo" | "sedi" | "contatti" | null;
+type Active = "servizi" | "professionisti" | "chi-siamo" | "contatti" | null;
 
 const NAV: { href: string; label: string; key: Active }[] = [
-  { href: "/#servizi", label: "Servizi", key: "servizi" },
-  { href: "/chi-siamo", label: "Chi siamo", key: "chi-siamo" },
-  { href: "/#sedi", label: "Sedi", key: "sedi" },
-  { href: "/contatti", label: "Contatti", key: "contatti" },
+  { href: "/servizi",        label: "Servizi",        key: "servizi" },
+  { href: "/professionisti", label: "Professionisti", key: "professionisti" },
+  { href: "/chi-siamo",      label: "Chi siamo",      key: "chi-siamo" },
+  { href: "/contatti",       label: "Contatti",       key: "contatti" },
 ];
 
-/* Reveal-on-scroll: mirrors the IntersectionObserver in the static pages.
-   Mounted once by SiteHeader so every `.reveal` on the page animates in. */
 function useReveal() {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      els.forEach((el) => el.classList.add("in"));
+      els.forEach(el => el.classList.add("in"));
       return;
     }
     const io = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            io.unobserve(e.target);
-          }
-        }),
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      }),
       { threshold: 0.12 }
     );
     els.forEach((el, i) => {
@@ -56,7 +47,7 @@ export function SiteHeader({
   transparent?: boolean;
 }) {
   const [solid, setSolid] = useState(!transparent);
-  const [menu, setMenu] = useState(false);
+  const [menu,  setMenu]  = useState(false);
   useReveal();
 
   useEffect(() => {
@@ -77,7 +68,7 @@ export function SiteHeader({
             VIRTUS<span className="dot">.</span>
           </Link>
           <nav className="nav">
-            {NAV.map((n) => (
+            {NAV.map(n => (
               <Link
                 key={n.key}
                 href={n.href}
@@ -94,7 +85,7 @@ export function SiteHeader({
               style={{ padding: ".7rem 1.2rem", fontSize: ".86rem" }}
             >
               <Icon name="calendar-check" />
-              Prenota una prova
+              Prenota una consulenza
             </Link>
             <button className="menu-btn" onClick={() => setMenu(true)}>
               Menu
@@ -107,7 +98,7 @@ export function SiteHeader({
         <button className="close" aria-label="Chiudi" onClick={() => setMenu(false)}>
           ×
         </button>
-        {NAV.map((n) => (
+        {NAV.map(n => (
           <Link key={n.key} href={n.href} onClick={() => setMenu(false)}>
             {n.label}
           </Link>
@@ -118,7 +109,7 @@ export function SiteHeader({
           onClick={() => setMenu(false)}
           style={{ marginTop: "1rem" }}
         >
-          Prenota una prova
+          Prenota una consulenza
         </Link>
       </nav>
     </>
@@ -129,14 +120,15 @@ export function SiteFooter() {
   return (
     <footer className="ft">
       <div className="wrap ft-top">
+        {/* Brand */}
         <div>
           <Link className="logo" href="/">
             VIRTUS<span className="dot">.</span>
           </Link>
           <p className="about">
-            Centro fitness, movimento e benessere a Brescia. Allenamento su misura,
-            Pilates, Reformer, recupero e postura — seguiti da professionisti, in due
-            sedi.
+            Centro multidisciplinare per salute, movimento e benessere a Brescia.
+            Fisioterapia, nutrizione, osteopatia, logopedia, ortottica, ostetricia,
+            massoterapia e percorsi di movimento.
           </p>
           <div className="socials">
             <a href="#" aria-label="Instagram">
@@ -153,36 +145,52 @@ export function SiteFooter() {
             </a>
           </div>
         </div>
+
+        {/* Servizi */}
         <div>
           <h5>Servizi</h5>
           <ul>
-            <li><Link href="/#servizi">Allenamento personalizzato</Link></li>
-            <li><Link href="/#servizi">Pilates</Link></li>
-            <li><Link href="/servizi/pilates-reformer">Pilates Reformer</Link></li>
-            <li><Link href="/#servizi">Benessere &amp; salute</Link></li>
-            <li><Link href="/#servizi">Recupero &amp; postura</Link></li>
+            <li><Link href="/servizi/fisioterapia">Fisioterapia</Link></li>
+            <li><Link href="/servizi/nutrizione">Nutrizione</Link></li>
+            <li><Link href="/servizi/osteopatia">Osteopatia</Link></li>
+            <li><Link href="/servizi/logopedia">Logopedia</Link></li>
+            <li><Link href="/servizi/ortottica">Ortottica</Link></li>
+            <li><Link href="/servizi/ostetricia">Ostetricia</Link></li>
+            <li><Link href="/servizi/massoterapia">Massoterapia</Link></li>
           </ul>
         </div>
+
+        {/* Centro */}
         <div>
           <h5>Centro</h5>
           <ul>
             <li><Link href="/chi-siamo">Chi siamo</Link></li>
-            <li><Link href="/#metodo">Il metodo</Link></li>
-            <li><Link href="/#sedi">Le sedi</Link></li>
-            <li><Link href="/contatti">Prenota una prova</Link></li>
+            <li><Link href="/professionisti">I professionisti</Link></li>
+            <li><Link href="/servizi">Tutti i servizi</Link></li>
+            <li><Link href="/contatti">Contatti</Link></li>
           </ul>
-        </div>
-        <div>
-          <h5>Sedi &amp; contatti</h5>
-          <div className="ad"><Icon name="map-pin" /><span>Via Corfù 71, Brescia</span></div>
-          <div className="ad"><Icon name="map-pin" /><span>Via Montello 79, Brescia</span></div>
-          <div className="ad"><Icon name="phone" /><span>+39 030 000 0000</span></div>
-          <span className="note">Telefono e orari di esempio — da sostituire.</span>
+          <div style={{ marginTop: "1.4rem" }}>
+            <a
+              className="btn btn-red"
+              href={WA}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ padding: ".65rem 1.1rem", fontSize: ".85rem" }}
+            >
+              <Icon name="message-circle" />
+              Scrivici su WhatsApp
+            </a>
+          </div>
         </div>
       </div>
+
       <div className="wrap ft-bot">
         <p style={{ margin: 0 }}>© 2026 Virtus. Tutti i diritti riservati.</p>
-        <p style={{ margin: 0 }}>Privacy Policy · Cookie Policy</p>
+        <p style={{ margin: 0 }}>
+          <Link href="/privacy-policy">Privacy Policy</Link>
+          {" · "}
+          <Link href="/cookie-policy">Cookie Policy</Link>
+        </p>
       </div>
     </footer>
   );
@@ -190,7 +198,7 @@ export function SiteFooter() {
 
 export function WhatsappFab() {
   return (
-    <a className="fab" href={WA} aria-label="WhatsApp">
+    <a className="fab" href={WA} aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
       <Icon name="message-circle" />
       Scrivici
     </a>

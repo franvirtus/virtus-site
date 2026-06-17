@@ -1,92 +1,146 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-
-import { BrandLogo } from "@/components/brand-logo";
-import { SectionHeading } from "@/components/section-heading";
-import { ServiceCard } from "@/components/service-card";
-import { createPageMetadata } from "@/lib/metadata";
+import { SiteHeader, SiteFooter, WhatsappFab, WA } from "@/components/SiteChrome";
+import Icon from "@/components/Icon";
 import { services } from "@/data/services";
-import { siteConfig } from "@/data/site";
 
-export const metadata = createPageMetadata({
-  title: siteConfig.seo.services.title,
-  description: siteConfig.seo.services.description,
-  path: "/servizi",
-});
+export const metadata: Metadata = {
+  title: "Servizi | Virtus",
+  description:
+    "Fisioterapia, nutrizione, osteopatia, osteopatia pediatrica, logopedia, ortottica, ostetricia, massoterapia. Scopri tutti i servizi del centro Virtus a Brescia.",
+};
 
-export default function ServicesPage() {
+const SERVICE_ICONS: Record<string, string> = {
+  fisioterapia:            "activity",
+  nutrizione:              "apple",
+  osteopatia:              "hand",
+  "osteopatia-pediatrica": "baby",
+  ortottica:               "eye",
+  logopedia:               "mic",
+  ostetricia:              "heart",
+  massoterapia:            "wind",
+};
+
+export default function ServiziPage() {
   return (
-    <div className="px-4 py-10 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        <section className="overflow-hidden rounded-[2.1rem] border border-border/70 bg-white shadow-[0_24px_52px_rgba(15,61,56,0.06)]">
-          <div className="grid gap-8 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1.08fr_0.92fr] lg:px-10">
-            <div>
-              <div className="inline-flex rounded-[1.5rem] border border-border/60 bg-surface-muted px-4 py-3">
-                <BrandLogo compact />
-              </div>
+    <>
+      <SiteHeader active="servizi" transparent />
 
-              <SectionHeading
-                eyebrow="Servizi"
-                title={siteConfig.servicesIntro.title}
-                description={siteConfig.servicesIntro.description}
-              />
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={siteConfig.contacts.whatsappHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(15,109,99,0.18)] transition hover:bg-brand-dark"
-                >
-                  Scrivici su WhatsApp
-                </a>
-                <Link
-                  href="/contatti"
-                  className="inline-flex items-center justify-center rounded-full border border-brand/15 bg-brand-soft px-6 py-3.5 text-sm font-semibold text-brand-dark transition hover:border-brand/35"
-                >
-                  Richiedi informazioni
-                </Link>
-              </div>
-            </div>
-
-            <aside className="rounded-[1.9rem] bg-brand-dark p-6 text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/58">
-                Cosa trovi qui
-              </p>
-              <div className="mt-5 space-y-3">
-                {siteConfig.servicesIntro.points.map((point) => (
-                  <div
-                    key={point}
-                    className="rounded-[1.2rem] border border-white/10 bg-white/6 px-4 py-4"
-                  >
-                    <p className="text-sm leading-7 text-white/84">{point}</p>
-                  </div>
-                ))}
-              </div>
-            </aside>
+      {/* ── PAGE HERO ──────────────────────────────────────── */}
+      <div className="phero">
+        <div className="wrap in">
+          <div className="crumb">
+            <Link href="/">Home</Link> / Servizi
           </div>
-        </section>
+          <h1>
+            Otto aree specialistiche,<br />
+            <span className="hl">un unico centro.</span>
+          </h1>
+          <p>
+            Ogni servizio è presidiato da professionisti dedicati, in dialogo
+            con le altre figure del centro per costruire percorsi integrati.
+          </p>
+          <div className="pcta">
+            <Link className="btn btn-red" href="/contatti">
+              <Icon name="calendar-check" />
+              Prenota una consulenza
+            </Link>
+            <a className="btn btn-ghost-l" href={WA} target="_blank" rel="noopener noreferrer">
+              <Icon name="message-circle" />
+              Scrivici su WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
 
-        <section className="mt-10">
-          <div className="grid gap-6 lg:grid-cols-[0.88fr_1.12fr] lg:items-end">
-            <SectionHeading
-              eyebrow="Panoramica"
-              title="Una griglia servizi piu ordinata, piu leggibile e piu credibile."
-              description="Ogni card mantiene una struttura semplice, ma con piu identita visiva e con un rimando chiaro al primo contatto."
-            />
-            <p className="max-w-xl text-sm leading-8 text-foreground/72 lg:justify-self-end">
-              Il punto non e mostrare piu elementi possibile, ma presentare bene i
-              servizi reali del centro e rendere piu facile capire quale pagina aprire.
+      {/* ── GRIGLIA SERVIZI ─────────────────────────────────── */}
+      <section className="block">
+        <div className="wrap">
+          <div className="sec-head reveal">
+            <span className="eyebrow">Panoramica</span>
+            <h2>Tutti i nostri servizi</h2>
+            <p>
+              Clicca su un servizio per scoprire come lavoriamo, quando può
+              essere utile e chi sono i professionisti dell'area.
             </p>
           </div>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {services.map((service) => (
-              <ServiceCard key={service.slug} service={service} />
+          <div
+            className="msvc-grid reveal"
+            style={{
+              background: "var(--ink)",
+              borderRadius: "1.4rem",
+              padding: "2rem",
+              marginTop: "2rem",
+            }}
+          >
+            {services.map(s => (
+              <Link key={s.slug} href={s.href} className="msvc">
+                <div className="ic"><Icon name={SERVICE_ICONS[s.slug] ?? "activity"} /></div>
+                <h3>{s.title}</h3>
+                <p>{s.shortDescription}</p>
+              </Link>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
-    </div>
+      {/* ── ELENCO DETTAGLIATO ──────────────────────────────── */}
+      <section className="block" style={{ background: "var(--beige)" }}>
+        <div className="wrap">
+          <div className="sec-head center reveal">
+            <span className="eyebrow">In dettaglio</span>
+            <h2>A chi si rivolge ogni servizio</h2>
+          </div>
+          <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
+            {services.map((s, i) => (
+              <Link
+                key={s.slug}
+                href={s.href}
+                className="reveal svc-row"
+              >
+                <div className="svc-row-left">
+                  <div className="need-card-icon">
+                    <Icon name={SERVICE_ICONS[s.slug] ?? "activity"} />
+                  </div>
+                  <div>
+                    <div className="svc-row-title">{s.title}</div>
+                    <div className="svc-row-kicker">{s.kicker}</div>
+                  </div>
+                </div>
+                <Icon name="arrow-right" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ─────────────────────────────────────────────── */}
+      <section className="block">
+        <div className="wrap">
+          <div className="cta-band reveal">
+            <div className="in">
+              <h2>Non sai quale servizio fa per te?</h2>
+              <p>
+                Scrivici o torna in homepage per usare lo strumento di orientamento:
+                ti aiutiamo a capire da dove partire.
+              </p>
+              <div className="cta-actions">
+                <Link className="btn btn-white" href="/#orientamento">
+                  <Icon name="compass" />
+                  Strumento di orientamento
+                </Link>
+                <a className="btn btn-ghost-l" href={WA} target="_blank" rel="noopener noreferrer">
+                  <Icon name="message-circle" />
+                  Scrivici su WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter />
+      <WhatsappFab />
+    </>
   );
 }
