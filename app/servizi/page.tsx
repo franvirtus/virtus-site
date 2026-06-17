@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { BrandLogo } from "@/components/brand-logo";
-import { CtaBanner } from "@/components/cta-banner";
 import { SectionHeading } from "@/components/section-heading";
 import { ServiceCard } from "@/components/service-card";
 import { createPageMetadata } from "@/lib/metadata";
@@ -87,9 +86,6 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <div className="mt-12">
-          <CtaBanner />
-        </div>
       </div>
     </div>
   );
